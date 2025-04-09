@@ -1,26 +1,26 @@
-import java.io.*;
-import java.util.*;
+import java.util.Vector;
 
-/**
- * Classe représentant un vendeur associé à un produit.
- */
 public class Vendeur {
 
-    // Attribut
-    public int id_produit;
+    // Attributs intrinsèques
+    public String nom;
+    public int id;
 
-    // Constructeur par défaut avec valeur par défaut
-    public Vendeur() {
-        this.id_produit = 1;
+    // Vecteur pour les clients associés
+    public Vector<Client> clients = new Vector<>();
+
+    // Constructeur
+    public Vendeur(String nom, int id) {
+        this.nom = nom;
+        this.id = id;
     }
 
-    // Constructeur avec paramètre
-    public Vendeur(int id_produit) {
-        this.id_produit = id_produit;
+    // Méthodes pour gérer les clients
+    public void addClient(Client client) {
+        this.clients.add(client);
     }
 
-    // Setter
-    public void setId_produit(int id_produit) {
-        this.id_produit = id_produit;
+    public Vector<Client> getClients() {
+        return clients;
     }
 }

@@ -1,43 +1,25 @@
+import java.util.Vector;
 
-import java.io.*;
-import java.util.*;
-
-/**
- * 
- */
 public class Critere {
 
-    /**
-     * Default constructor
-     */
-    public Critere(String nom, String valeur) {
-        this.nom = nom;
-        this.valeur = valeur;
-    }
-
-    /**
-     * 
-     */
+    // Attributs intrinsèques
     public String nom;
+    public int valeur;
 
-    /**
-     * 
-     */
-    public String valeur;
+    // Vecteur pour les critères associés
+    public Vector<String> sousCriteres = new Vector<>();
 
-    public void setNom(String nom) {
+    // Constructeur
+    public Critere(String nom, int valeur) {
         this.nom = nom;
+        this.valeur = "";
     }
 
-    public void setValeur(String valeur) {
-        this.valeur = valeur;
+    public void addCritere(Critere critere) {
+        this.criteres.add(critere);
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public String getValeur() {
-        return valeur;
+    public Vector<Critere> getCriteres() {
+        return criteres;
     }
 }

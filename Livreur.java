@@ -1,45 +1,26 @@
+import java.util.Vector;
 
-import java.io.*;
-import java.util.*;
-
-/**
- * 
- */
 public class Livreur {
 
-    /**
-        * Default constructor
-        */
-        public Livreur() {
-            public Livreur(String transporteur, boolean est_tracquable) {
-           this.transporteur = transporteur;
-           this.est_tracquable = est_tracquable;
-        }
-        }
+    // Attributs intrinsèques
+    public String transporteur;
+    public boolean est_tracquable;
 
-        /**
-        * 
-        */
-        public String transporteur;
+    // Vecteur pour les commandes livrées
+    public Vector<Commande> commandesLivrees = new Vector<>();
 
-        /**
-        * 
-        */
-        public boolean est_tracquable;
+    // Constructeur
+    public Livreur(String transporteur, boolean est_tracquable) {
+        this.transporteur = transporteur;
+        this.est_tracquable = est_tracquable;
+    }
 
-        public String getTransporteur() {
-           return transporteur;
-        }
+    // Méthodes pour gérer les commandes livrées
+    public void addCommandeLivree(Commande commande) {
+        this.commandesLivrees.add(commande);
+    }
 
-        public void setTransporteur(String transporteur) {
-           this.transporteur = transporteur;
-        }
-
-        public boolean isEst_tracquable() {
-           return est_tracquable;
-        }
-
-        public void setEst_tracquable(boolean est_tracquable) {
-           this.est_tracquable = est_tracquable;
-        }
+    public Vector<Commande> getCommandesLivrees() {
+        return commandesLivrees;
+    }
 }

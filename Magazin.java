@@ -1,45 +1,38 @@
-import java.io.*;
-import java.util.*;
+import java.util.Vector;
 
-/**
- * 
- */
 public class Magazin {
 
-    /**
-     * Default constructor
-     */
-    public Magazin() {
+    // Attributs intrinsèques
+    public String nom;
+    public String adresse;
+
+    // Vecteur pour les vendeurs et les clients
+    public Vector<Vendeur> vendeurs = new Vector<>();
+    public Vector<Client> clients = new Vector<>();
+    public Vector<Livreur> livreur = new Vector<>();
+    public Vector<Composants> composants = new Vector<>();
+
+    // Constructeur
+    public Magazin(String nom, String adresse) {
+        this.nom = nom;
+        this.adresse = adresse;
     }
 
-    /**
-     * Nom du magasin
-     */
-    private String Nom;
-
-    /**
-     * Liste des produits (par exemple)
-     */
-    private List<String> produits = new ArrayList<>();
-
-    /**
-     * Méthode pour ajouter un produit à la liste
-     */
-    public void addProduit(String produit) {
-        this.produits.add(produit);
+    // Méthodes pour gérer les vendeurs
+    public void addVendeur(Vendeur vendeur) {
+        this.vendeurs.add(vendeur);
     }
 
-    /**
-     * Méthode pour définir le nom du magasin
-     */
-    public void setNom(String nom) {
-        this.Nom = nom;
+    public Vector<Vendeur> getVendeurs() {
+        return vendeurs;
     }
 
-    /**
-     * Méthode pour obtenir le nom du magasin
-     */
-    public String getNom() {
-        return this.Nom;
+    // Méthodes pour gérer les clients
+    public void addClient(Client client) {
+        this.clients.add(client);
+    }
+
+    public Vector<Client> getClients() {
+        return clients;
     }
 }
