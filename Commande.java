@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.*;
 
@@ -14,6 +13,7 @@ public class Commande {
         this.id_commande = id_commande;
         this.date_de_livraison = date_de_livraison;
         this.date_commande = date_commande;
+        this.produits = new Vector<>();
     }
 
     /**
@@ -30,6 +30,11 @@ public class Commande {
      * 
      */
     public Date date_commande;
+
+    /**
+     * Liste des produits associés à la commande
+     */
+    public Vector<String> produits;
 
     public void setId_commande(int id_commande) {
         this.id_commande = id_commande;
@@ -53,5 +58,26 @@ public class Commande {
 
     public Date getDate_commande() {
         return date_commande;
+    }
+
+    /**
+     * Ajoute un produit à la liste des produits
+     */
+    public void addProduit(String produit) {
+        this.produits.add(produit);
+    }
+
+    /**
+     * Définit la liste complète des produits
+     */
+    public void setProduits(Vector<String> produits) {
+        this.produits = produits;
+    }
+
+    /**
+     * Retourne la liste des produits
+     */
+    public Vector<String> getProduits() {
+        return produits;
     }
 }
