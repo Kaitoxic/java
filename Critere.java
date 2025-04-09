@@ -7,12 +7,13 @@ public class Critere {
     public int valeur;
 
     // Vecteur pour les critères associés
-    public Vector<String> sousCriteres = new Vector<>();
+    public Vector<Composant> composant = new Vector<>();
 
     // Constructeur
-    public Critere(String nom, int valeur) {
+    public Critere(String nom, int valeur, Composant composant) {
         this.nom = nom;
         this.valeur = "";
+        this.composant.add(composant);
     }
 
     public void addCritere(Critere critere) {

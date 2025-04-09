@@ -18,7 +18,7 @@ public class Magazin {
         this.adresse = adresse;
     }
 
-    // Méthodes pour gérer les vendeurs
+    // Methodes pour gerer les vendeurs
     public void addVendeur(Vendeur vendeur) {
         this.vendeurs.add(vendeur);
     }
@@ -27,12 +27,25 @@ public class Magazin {
         return vendeurs;
     }
 
-    // Méthodes pour gérer les clients
+    // Methodes pour gerer les clients
     public void addClient(Client client) {
         this.clients.add(client);
     }
 
     public Vector<Client> getClients() {
         return clients;
+    }
+
+    public void addLivreur(Livreur livreur) {
+        this.livreur.add(livreur);
+    }
+    public Vector<Livreur> getLivreur() {
+        return livreur;
+    }
+    public void addComposant(Composants composant) {
+        this.composants.add(composant);
+    }
+    public Vector<Composants> getComposants() {
+        return composants;
     }
 }
