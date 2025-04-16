@@ -7,7 +7,7 @@ public class Client {
     protected String email;
     public int id;
 
-    // Vecteur pour les commandes associees
+    // Vecteur pour les commandes associées
     private Vector<Commande> commandes = new Vector<>();
     private Vector<Magazin> magazin = new Vector<>();
 
@@ -16,10 +16,10 @@ public class Client {
         this.nom = nom;
         this.email = email;
         this.id = id;
-        this.magasins.add(magazin);
+        this.magazin.add(magazin);
     }
 
-    // Methodes pour gerer les commandes
+    // Méthodes pour gérer les commandes
     public void addCommande(Commande commande) {
         this.commandes.add(commande);
     }
@@ -28,13 +28,16 @@ public class Client {
         return commandes;
     }
 
+    // Méthodes pour gérer les magasins
     public void addMagazin(Magazin magazin) {
         this.magazin.add(magazin);
     }
+
     public Vector<Magazin> getMagazin() {
         return magazin;
     }
-    public void setMagazin(Magazin magazin) {
+
+    public void setMagazin(Vector<Magazin> magazin) {
         this.magazin = magazin;
     }
 }

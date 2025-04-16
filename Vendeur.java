@@ -6,8 +6,7 @@ public class Vendeur {
     public String nom;
     public int id;
 
-    // Vecteur pour les clients associes
-    public Vector<Client> clients = new Vector<>();
+    // Vecteur pour les magasins et ordinateurs préconfigurés associés
     public Vector<Magazin> magazin = new Vector<>();
     public Vector<Ordinateur_Preconfigurees> ordinateur = new Vector<>();
 
@@ -19,22 +18,29 @@ public class Vendeur {
         this.ordinateur.add(ordinateur);
     }
 
-    // Methodes pour gerer les clients
-    public void addClient(Client client) {
-        this.clients.add(client);
-    }
-
-    public Vector<Client> getClients() {
-        return clients;
-    }
-
+    // Méthodes pour gérer les magasins
     public void addMagazin(Magazin magazin) {
         this.magazin.add(magazin);
     }
+
     public Vector<Magazin> getMagazin() {
         return magazin;
     }
-    public void setMagazin(Magazin magazin) {
+
+    public void setMagazin(Vector<Magazin> magazin) {
         this.magazin = magazin;
+    }
+
+    // Méthodes pour gérer les ordinateurs préconfigurés
+    public void addOrdinateur(Ordinateur_Preconfigurees ordinateur) {
+        this.ordinateur.add(ordinateur);
+    }
+
+    public Vector<Ordinateur_Preconfigurees> getOrdinateur() {
+        return ordinateur;
+    }
+
+    public void setOrdinateur(Vector<Ordinateur_Preconfigurees> ordinateur) {
+        this.ordinateur = ordinateur;
     }
 }

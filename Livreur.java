@@ -32,7 +32,7 @@ public class Livreur {
     public Vector<Magazin> getMagazin() {
         return magazin;
     }
-    public void setMagazin(Magazin magazin) {
+    public void setMagazin(Vector<Magazin> magazin) {
         this.magazin = magazin;
     }
 }

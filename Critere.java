@@ -7,20 +7,23 @@ public class Critere {
     public int valeur;
 
     // Vecteur pour les critères associés
-    public Vector<Composant> composant = new Vector<>();
+    public Vector<Composants> composant = new Vector<>();
 
     // Constructeur
-    public Critere(String nom, int valeur, Composant composant) {
+    public Critere(String nom, int valeur, Composants composant) {
         this.nom = nom;
-        this.valeur = "";
+        this.valeur = 0;
         this.composant.add(composant);
     }
 
-    public void addCritere(Critere critere) {
-        this.criteres.add(critere);
+    // Méthodes pour gérer les composants
+    public void addComposant(Composants composant) {
+        this.composant.add(composant);
     }
-
-    public Vector<Critere> getCriteres() {
-        return criteres;
+    public Vector<Composants> getComposant() {
+        return composant;
+    }
+    public void setComposant(Vector<Composants> composant) {
+        this.composant = composant;
     }
 }

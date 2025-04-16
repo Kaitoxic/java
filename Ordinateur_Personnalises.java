@@ -1,4 +1,6 @@
 import java.util.Vector;
+import java.util.Date;
+
 
 public class Ordinateur_Personnalises extends Commande {
 
@@ -9,10 +11,10 @@ public class Ordinateur_Personnalises extends Commande {
     public boolean cle_windows;
 
     // Vecteur pour les composants
-    public Vector<Composant> composants = new Vector<>();
+    public Vector<Composants> composants = new Vector<>();
 
-    public Ordinateur_Personnalises(int id_commande, Date date_de_livraison, Date date_commande, String nom, int id, float frais_de_montage, boolean cle_windows) {
-        super(id_commande, date_de_livraison, date_commande);
+    public Ordinateur_Personnalises(String nom, int id, float frais_de_montage, int id_commande, Date date_de_livraison, Date date_commande, Client client, Livreur livreur, boolean cle_windows) {
+        super(id_commande, date_de_livraison, date_commande, client, livreur);
         this.nom = nom;
         this.id = id;
         this.frais_de_montage = frais_de_montage;
@@ -20,11 +22,11 @@ public class Ordinateur_Personnalises extends Commande {
     }
 
     // Methodes pour gerer les composants
-    public void addComposant(String composant) {
+    public void addComposant(Composants composant) {
         this.composants.add(composant);
     }
 
-    public Vector<String> getComposants() {
+    public Vector<Composants> getComposants() {
         return composants;
     }
 }
