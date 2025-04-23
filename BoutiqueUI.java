@@ -24,11 +24,19 @@ public class BoutiqueUI extends JFrame {
             e.printStackTrace();
         }
 
-        setTitle("Boutique PC");
+        setTitle("Config&Co");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1200, 700);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+
+        try {
+            // Remplacez "logo.png" par le chemin vers votre image
+            ImageIcon icon = new ImageIcon("images/logo.png");
+            setIconImage(icon.getImage());
+        } catch (Exception e) {
+            System.err.println("Erreur lors du chargement du logo: " + e.getMessage());
+        }
 
         add(buildLeftPanel(), BorderLayout.WEST);
         add(buildCenterPanel(), BorderLayout.CENTER);
@@ -39,7 +47,33 @@ public class BoutiqueUI extends JFrame {
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.setPreferredSize(new Dimension(150, getHeight()));
         leftPanel.setBackground(BG_LIGHT);
-        leftPanel.setBorder(BorderFactory.createLineBorder(BORDER_GRAY));
+        //leftPanel.setBorder(BorderFactory.createLineBorder(BORDER_GRAY));
+
+        // Logo en haut à gauche
+        JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0)); // Changer CENTER par LEFT et ajouter des marges
+        logoPanel.setBackground(BG_LIGHT);
+        logoPanel.setBorder(new EmptyBorder(20, 5, 10, 0)); // Ajuster les marges pour mieux positionner
+
+        try {
+            ImageIcon logoIcon = new ImageIcon("images/logo.png");
+            // Redimensionner le logo à une taille appropriée
+            Image img = logoIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH); // Légèrement plus petit
+            JLabel logoLabel = new JLabel(new ImageIcon(img));
+            logoPanel.add(logoLabel);
+            
+            // Ajouter le nom de la boutique à côté du logo
+            JLabel boutiqueNameLabel = new JLabel("Config&Co ®");
+            boutiqueNameLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+            boutiqueNameLabel.setForeground(ACCENT); // Utiliser la couleur d'accent pour le nom
+            logoPanel.add(boutiqueNameLabel);
+            
+        } catch (Exception e) {
+            System.err.println("Erreur lors du chargement du logo d'affichage: " + e.getMessage());
+            JLabel fallbackLabel = new JLabel("Boutique PC");
+            fallbackLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+            fallbackLabel.setForeground(ACCENT);
+            logoPanel.add(fallbackLabel);
+        }
 
         JPanel clientInfo = new JPanel();
         clientInfo.setLayout(new BoxLayout(clientInfo, BoxLayout.Y_AXIS));
@@ -48,6 +82,12 @@ public class BoutiqueUI extends JFrame {
         clientInfo.add(linkLabel("Nom client"));
         clientInfo.add(linkLabel("Prénom"));
         clientInfo.add(linkLabel("ID"));
+
+        // Ajouter le logo au-dessus des infos client
+        JPanel topSection = new JPanel(new BorderLayout());
+        topSection.setBackground(BG_LIGHT);
+        topSection.add(logoPanel, BorderLayout.NORTH);
+        topSection.add(clientInfo, BorderLayout.CENTER);
 
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
@@ -92,7 +132,7 @@ public class BoutiqueUI extends JFrame {
         bottom.setBackground(BG_LIGHT);
         bottom.add(linkLabel("© 2025"), BorderLayout.SOUTH);
 
-        leftPanel.add(clientInfo, BorderLayout.NORTH);
+        leftPanel.add(topSection, BorderLayout.NORTH);
         leftPanel.add(menuPanel, BorderLayout.CENTER);
         leftPanel.add(bottom, BorderLayout.SOUTH);
         return leftPanel;
@@ -110,7 +150,7 @@ public class BoutiqueUI extends JFrame {
         titleLabel = new JLabel("<html><u><b>Ordinateurs préconfigurés</b></u></html>", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
 
-        JButton panierButton = new JButton("🛒 Panier");
+        JButton panierButton = new JButton("Panier");
         panierButton.setPreferredSize(new Dimension(130, 45));
         panierButton.setFocusPainted(false);
         panierButton.setBackground(ACCENT);
