@@ -40,4 +40,23 @@ public class Client {
     public void setMagazin(Vector<Magazin> magazin) {
         this.magazin = magazin;
     }
+
+    public String getNom() {
+        return nom;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 }

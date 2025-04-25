@@ -5,14 +5,14 @@ public class Ordinateur_Preconfigurees extends Commande {
 
     // Attributs intrinsèques
     public String nom;
-    public float prix;
+    public int prix;
     public int id;
     public String article_offert;
     public String description;
 
     public Vector<Vendeur> vendeur = new Vector<>();
 
-    public Ordinateur_Preconfigurees(String nom, float prix, int id, int id_commande, Date date_de_livraison, Date date_commande, Client client, Livreur livreur, Vendeur vendeur, String article_offert, String description) {
+    public Ordinateur_Preconfigurees(String nom, int prix, int id, int id_commande, Date date_de_livraison, Date date_commande, Client client, Livreur livreur, Vendeur vendeur, String article_offert, String description) {
         super(id_commande, date_de_livraison, date_commande, client, livreur);
         this.nom = nom;
         this.prix = prix;
@@ -33,10 +33,10 @@ public class Ordinateur_Preconfigurees extends Commande {
         this.vendeur = vendeur;
     }
     // Méthodes pour gérer les prix
-    public void setPrix(float prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
-    public float getPrix() {
+    public int getPrix() {
         return prix;
     }
     // Méthodes pour gérer les articles offerts
