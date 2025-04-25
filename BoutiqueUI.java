@@ -7,6 +7,14 @@ public class BoutiqueUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel centerContentPanel;
     private JLabel titleLabel;
+    private Magazin magazin;
+    private Client client;
+    private Ordinateur_Preconfigurees ordi1;
+    private Ordinateur_Preconfigurees ordi2;
+    private Ordinateur_Preconfigurees ordi3;
+    private int prix_total = 0;
+    private JPanel centre;
+    private JButton panierButton;
 
     // COULEURS MODERNES
     private final Color BG_LIGHT = new Color(245, 248, 250);
@@ -14,7 +22,12 @@ public class BoutiqueUI extends JFrame {
     private final Color BTN_HOVER = new Color(41, 128, 185);
     private final Color BORDER_GRAY = new Color(200, 200, 200);
 
-    public BoutiqueUI() {
+    public BoutiqueUI(Magazin magazin, Client client, Ordinateur_Preconfigurees ordi1, Ordinateur_Preconfigurees ordi2, Ordinateur_Preconfigurees ordi3) {
+        this.client = client;
+        this.ordi1 = ordi1;
+        this.ordi2 = ordi2;
+        this.ordi3 = ordi3;
+        
         // Look and feel système + polices modernisées
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -39,9 +52,9 @@ public class BoutiqueUI extends JFrame {
         } catch (Exception e) {
             System.err.println("Erreur lors du chargement du logo: " + e.getMessage());
         }
-
+        centre = buildCenterPanel();
         add(buildLeftPanel(), BorderLayout.WEST);
-        add(buildCenterPanel(), BorderLayout.CENTER);
+        add(centre, BorderLayout.CENTER);
     }
 
     // ========== PANNEAU GAUCHE ==========
@@ -81,9 +94,9 @@ public class BoutiqueUI extends JFrame {
         clientInfo.setLayout(new BoxLayout(clientInfo, BoxLayout.Y_AXIS));
         clientInfo.setBorder(new EmptyBorder(10, 10, 10, 10));
         clientInfo.setBackground(BG_LIGHT);
-        clientInfo.add(linkLabel("Nom client"));
-        clientInfo.add(linkLabel("Prénom"));
-        clientInfo.add(linkLabel("ID"));
+        clientInfo.add(linkLabel(client.getNom()));
+        clientInfo.add(linkLabel(client.getEmail()));
+        clientInfo.add(linkLabel(client.getId() + ""));
 
         // Ajouter le logo au-dessus des infos client
         JPanel topSection = new JPanel(new BorderLayout());
@@ -152,8 +165,8 @@ public class BoutiqueUI extends JFrame {
         titleLabel = new JLabel("<html><u><b>Ordinateurs préconfigurés</b></u></html>", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
 
-        JButton panierButton = new JButton("Panier");
-        panierButton.setPreferredSize(new Dimension(130, 45));
+        panierButton = new JButton("Commander : "+ prix_total + "€");
+        panierButton.setPreferredSize(new Dimension(190, 45));
         panierButton.setFocusPainted(false);
         panierButton.setBackground(ACCENT);
         panierButton.setForeground(Color.WHITE);
@@ -195,8 +208,8 @@ public class BoutiqueUI extends JFrame {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 80, 80));
         panel.setBackground(BG_LIGHT);
         panel.setBorder(new EmptyBorder(20, 10, 20, 10));
-        panel.add(productBox("Entrée de gamme", "500€", "images/pc_basique.jpg"));
-        panel.add(productBox("GOAT", "1000€", "images/pc_goat.jpg"));
+        panel.add(productBox(ordi1.getNom(), ordi1.getPrix() + "€", "images/pc_basique.jpg"));
+        panel.add(productBox(ordi2.getNom(), ordi2.getPrix() + "€", "images/pc_goat.jpg"));
         panel.add(productBox("Ultime", "2000€", "images/pc_ultime.jpg"));
         return panel;
     }
@@ -261,35 +274,70 @@ public class BoutiqueUI extends JFrame {
     }
 
     private JPanel productBox(String name, String price, String imagePath) {
-        JPanel box = new JPanel(new BorderLayout()) {
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setColor(new Color(0, 0, 0, 20));
-                g2.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10, 20, 20);
-            }
-        };
-        box.setOpaque(false);
-        box.setBackground(Color.WHITE);
-        box.setPreferredSize(new Dimension(220, 300));
-        box.setBorder(new EmptyBorder(10, 10, 10, 10));
+    JPanel box = new JPanel(new BorderLayout()) {
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(new Color(0, 0, 0, 20));
+            g2.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10, 20, 20);
+        }
+    };
+    box.setOpaque(false);
+    box.setBackground(Color.WHITE);
+    box.setPreferredSize(new Dimension(220, 300));
+    box.setBorder(new EmptyBorder(10, 10, 10, 10));
+    box.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        ImageIcon icon = new ImageIcon(imagePath);
-        Image img = icon.getImage().getScaledInstance(220, 220, Image.SCALE_SMOOTH);
-        JLabel imageLabel = new JLabel(new ImageIcon(img));
-        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        box.add(imageLabel, BorderLayout.CENTER);
+    // Get price value without the € symbol
+    int priceValue = Integer.parseInt(price.replace("€", ""));
 
-        JPanel bottom = new JPanel(new GridLayout(2, 1));
-        bottom.setBackground(new Color(250, 250, 250));
-        JLabel nameLabel = new JLabel("<html><b>" + name + "</b></html>", SwingConstants.CENTER);
-        JLabel priceLabel = new JLabel("<html><u>" + price + "</u></html>", SwingConstants.CENTER);
-        bottom.add(nameLabel);
-        bottom.add(priceLabel);
-        box.add(bottom, BorderLayout.SOUTH);
+    ImageIcon icon = new ImageIcon(imagePath);
+    Image img = icon.getImage().getScaledInstance(220, 220, Image.SCALE_SMOOTH);
+    JLabel imageLabel = new JLabel(new ImageIcon(img));
+    imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    box.add(imageLabel, BorderLayout.CENTER);
 
-        return box;
+    JPanel bottom = new JPanel(new GridLayout(2, 1));
+    bottom.setBackground(new Color(250, 250, 250));
+    JLabel nameLabel = new JLabel("<html><b>" + name + "</b></html>", SwingConstants.CENTER);
+    JLabel priceLabel = new JLabel("<html><u>" + price + "</u></html>", SwingConstants.CENTER);
+    bottom.add(nameLabel);
+    bottom.add(priceLabel);
+    box.add(bottom, BorderLayout.SOUTH);
+    
+    // Add click event to increment the total price
+    box.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            prix_total += priceValue;
+            updatePanierButton();
+            JOptionPane.showMessageDialog(box, 
+                name + " ajouté au panier pour " + price, 
+                "Produit ajouté", 
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            bottom.setBackground(new Color(240, 240, 240));
+        }
+        
+        @Override
+        public void mouseExited(MouseEvent e) {
+            bottom.setBackground(new Color(250, 250, 250));
+        }
+    });
+    
+    return box;
+}
+
+// Add a method to update the cart button with the current total
+//private JButton panierButton; // Add this as a class field
+
+private void updatePanierButton() {
+    if (panierButton != null) {
+        panierButton.setText("Commander : " + prix_total + "€");
     }
-
+}
 
 }
