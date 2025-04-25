@@ -28,6 +28,8 @@ public class BoutiqueUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1200, 700);
         setLocationRelativeTo(null);
+         // Bloquer le redimensionnement de la fenêtre
+        setResizable(false);
         setLayout(new BorderLayout());
 
         try {
@@ -289,8 +291,5 @@ public class BoutiqueUI extends JFrame {
         return box;
     }
 
-    // ========== MAIN ==========
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new BoutiqueUI().setVisible(true));
-    }
+
 }

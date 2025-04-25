@@ -1,4 +1,5 @@
 import java.util.Date;
+import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,5 +22,11 @@ public class Main {
         magasin.addLivreur(livreur);
         magasin.addComposant(gpu);
         System.out.println(vendeur.nom);
+        
+        // Afficher l'interface graphique
+        SwingUtilities.invokeLater(() -> {
+            BoutiqueUI ui = new BoutiqueUI();
+            ui.setVisible(true);
+        });
     }
 }
