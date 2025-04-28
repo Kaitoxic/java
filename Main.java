@@ -11,8 +11,6 @@ public class Main {
         Composants gpu = new Composants("NVIDIA GeForce RTX 3080", 699.99f , "GPU");
         Composants gpu2 = new Composants("AMD Radeon RX 6800", 579.99f, "GPU");
         Composants cpu = new Composants("Intel Core i9-11900K", 499.99f, "CPU");
-        Commande commande = new Commande(1, new Date(), new Date(), client, livreur);
-        Ordinateur_Personnalises ordiperso = new Ordinateur_Personnalises("Ordinateur Gamer", 1, 50.0f, 1, new Date(), new Date(), client, livreur, true);
         Ordinateur_Preconfigurees ordinateur1 = new Ordinateur_Preconfigurees("Ordinateur Basique", 500, 1, 1, new Date(), new Date(),client, livreur, vendeur, "Souris", "Ordinateur gamer avec carte graphique RTX 3080");
         Ordinateur_Preconfigurees ordinateur2 = new Ordinateur_Preconfigurees("Ordinateur Goated", 800, 2, 1, new Date(), new Date(), client, livreur, vendeur, "Clavier", "Ordinateur bureautique avec processeur i5");
         Ordinateur_Preconfigurees ordinateur3 = new Ordinateur_Preconfigurees("Ordinateur Ultimate", 1200, 3, 1, new Date(), new Date(), client, livreur, vendeur, "Sacoche", "Ordinateur portable léger et puissant");

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 public class BoutiqueUI extends JFrame {
     private CardLayout cardLayout;
@@ -219,10 +220,51 @@ public class BoutiqueUI extends JFrame {
             }
         });
 
-        panierButton.addActionListener(e -> {
-            cardLayout.show(centerContentPanel, "panier");
-            titleLabel.setText("<html><u><b>Mon Panier</b></u></html>");
-        });
+        // Remplacez l'ActionListener actuel du panierButton par celui-ci
+panierButton.addActionListener(e -> {
+    // Si le prix total est 0, afficher un message indiquant que le panier est vide
+    if (prix_total == 0) {
+        JOptionPane.showMessageDialog(this, 
+            "Votre panier est vide.", 
+            "Commande impossible", 
+            JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    // Créer une nouvelle commande
+    Client client = magasin.getClients().get(0); // Premier client pour simplifier
+    Livreur livreur = magasin.getLivreur().get(0); // Premier livreur pour simplifier
+    Date dateCommande = new Date();
+    Date dateLivraison = new Date(dateCommande.getTime() + 7 * 24 * 60 * 60 * 1000); // Date + 7 jours
+    
+    // ID de commande aléatoire (pour l'exemple)
+    int commandeId = (int)(Math.random() * 10000);
+    
+    // Créer la commande
+    Commande nouvelleCommande = new Commande(commandeId, dateCommande, dateLivraison, client, livreur);
+    
+    // Afficher le popup avec les informations
+    String message = "Détails de votre commande :\n\n" +
+                     "N° de commande : " + commandeId + "\n" +
+                     "Date : " + dateCommande + "\n" +
+                     "Livraison prévue : " + dateLivraison + "\n" +
+                     "Client : " + client.getNom() + "\n" +
+                     "Prix total : " + prix_total + "€\n\n" +
+                     "Merci pour votre commande !";
+    
+    JOptionPane.showMessageDialog(this, 
+        message, 
+        "Commande confirmée", 
+        JOptionPane.INFORMATION_MESSAGE);
+    
+    // Réinitialiser le panier
+    prix_total = 0;
+    updatePanierButton();
+    
+    // Afficher le panneau du panier vide
+    cardLayout.show(centerContentPanel, "panier");
+    titleLabel.setText("<html><u><b>Mon Panier</b></u></html>");
+});
 
         topPanel.add(titleLabel, BorderLayout.CENTER);
         topPanel.add(panierButton, BorderLayout.EAST);
