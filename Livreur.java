@@ -35,10 +35,4 @@ public class Livreur {
     public void setMagazin(Vector<Magazin> magazin) {
         this.magazin = magazin;
     }
-    public String getTransporteur() {
-        return transporteur;
-    }
-    public void setTransporteur(String transporteur) {
-        this.transporteur = transporteur;
-    }
 }
